@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pricing Interest – Amona Consulting</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f2f9f4;
+      --blush: #e4f2e8;
+      --green: #2e8b57;
+      --green-dark: #1f6b40;
+      --text: #101a13;
+      --muted: #5a7a62;
+      --border: #c4dcc9;
+      --white: #ffffff;
+      --radius: 10px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--blush);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 48px 16px 80px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 52px 48px;
+      max-width: 560px;
+      width: 100%;
+      box-shadow: 0 4px 40px rgba(20, 60, 30, 0.08);
+    }
+
+    .card-header { margin-bottom: 40px; }
+
+    .card-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .card-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 300;
+      margin-top: 10px;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--green);
+      border-radius: 2px;
+      margin: 16px 0 0;
+    }
+
+    .field-group { margin-bottom: 28px; }
+
+    label, .field-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+
+    .name-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: var(--cream);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.12);
+      background: var(--white);
+    }
+
+    /* Pricing cards */
+    .pricing-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pricing-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      background: var(--cream);
+      position: relative;
+    }
+
+    .pricing-card:hover {
+      border-color: var(--green);
+      background: var(--white);
+    }
+
+    .pricing-card input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      background: var(--white);
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .pricing-card input[type="radio"]:checked {
+      border-color: var(--green);
+    }
+
+    .pricing-card input[type="radio"]:checked::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .pricing-card.selected {
+      border-color: var(--green);
+      background: #f0faf4;
+      box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+    }
+
+    .pricing-card-content {
+      flex: 1;
+    }
+
+    .pricing-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+
+    .pricing-amount {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--text);
+    }
+
+    .pricing-amount span {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-left: 4px;
+    }
+
+    .pricing-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--green);
+      color: white;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 12px;
+      letter-spacing: 0.01em;
+    }
+
+    .submit-btn:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:active { transform: translateY(0); }
+
+    @media (max-width: 520px) {
+      .card { padding: 36px 24px; }
+      .name-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">
+      <h1>One quick<br/><em>question</em></h1>
+      <div class="divider"></div>
+      <p>Help us understand what works for you — takes 30 seconds.</p>
+    </div>
+
+    <form id="pricingForm" onsubmit="handleSubmit(event)" novalidate>
+
+      <!-- Name -->
+      <div class="field-group">
+        <div class="name-row">
+          <div>
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Ada" required />
+          </div>
+          <div>
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Lovelace" required />
+          </div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="field-group">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" placeholder="ada@example.com" required />
+      </div>
+
+      <!-- Pricing -->
+      <div class="field-group">
+        <div class="field-label">How much would you be willing to pay?</div>
+        <div class="pricing-options">
+
+          <label class="pricing-card" id="card-a">
+            <input type="radio" name="price" value="30000" onchange="selectCard('card-a')" required />
+            <div class="pricing-card-content">
+              <div class="pricing-label">Option A</div>
+              <div class="pricing-amount">₦30,000</div>
+            </div>
+          </label>
+
+          <label class="pricing-card" id="card-b">
+            <input type="radio" name="price" value="50000" onchange="selectCard('card-b')" />
+            <div class="pricing-card-content">
+              <div class="pricing-label">Option B</div>
+              <div class="pricing-amount">₦50,000</div>
+            </div>
+          </label>
+
+          <label class="pricing-card" id="card-c">
+            <input type="radio" name="price" value="70000" onchange="selectCard('card-c')" />
+            <div class="pricing-card-content">
+              <div class="pricing-label">Option C</div>
+              <div class="pricing-amount">₦70,000</div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    function selectCard(selectedId) {
+      ['card-a', 'card-b', 'card-c'].forEach(id => {
+        document.getElementById(id).classList.toggle('selected', id === selectedId);
+      });
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.submit-btn');
+      const form = e.target;
+
+      const selectedPrice = form.querySelector('input[name="price"]:checked');
+      if (!selectedPrice) {
+        alert('Please select a pricing option.');
+        return;
+      }
+
+      btn.textContent = 'Submitting…';
+      btn.disabled = true;
+
+      const payload = {
+        firstName:  form.firstName.value.trim(),
+        lastName:   form.lastName.value.trim(),
+        email:      form.email.value.trim(),
+        price:      selectedPrice.value,
+      };
+
+      try {
+        const res = await fetch('https://amonaconsulting000.app.n8n.cloud/webhook/5d0b459e-3729-45ba-a47c-6de6a410f0e0', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          btn.textContent = '✓ Submitted!';
+          btn.style.background = '#1f6b40';
+          form.reset();
+          ['card-a', 'card-b', 'card-c'].forEach(id => {
+            document.getElementById(id).classList.remove('selected');
+          });
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        btn.textContent = 'Something went wrong — try again';
+        btn.style.background = '#c0392b';
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
