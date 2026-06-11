@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pricing Interest – Amona Consulting</title>
+  <title>CEO Hangout – Expression of Interest</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,7 +34,7 @@
       background: var(--white);
       border-radius: 20px;
       padding: 52px 48px;
-      max-width: 560px;
+      max-width: 600px;
       width: 100%;
       box-shadow: 0 4px 40px rgba(20, 60, 30, 0.08);
     }
@@ -53,6 +53,7 @@
       font-size: 0.95rem;
       font-weight: 300;
       margin-top: 10px;
+      line-height: 1.6;
     }
 
     .divider {
@@ -63,7 +64,7 @@
       margin: 16px 0 0;
     }
 
-    .field-group { margin-bottom: 28px; }
+    .field-group { margin-bottom: 32px; }
 
     label, .field-label {
       display: block;
@@ -74,14 +75,22 @@
       letter-spacing: 0.01em;
     }
 
-    .name-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    .field-number {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--green);
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2px 9px;
+      margin-bottom: 8px;
     }
 
     input[type="text"],
-    input[type="email"] {
+    input[type="email"],
+    input[type="tel"],
+    textarea {
       width: 100%;
       padding: 12px 16px;
       border: 1.5px solid var(--border);
@@ -94,38 +103,32 @@
       outline: none;
     }
 
-    input:focus {
+    input:focus, textarea:focus {
       border-color: var(--green);
       box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.12);
       background: var(--white);
     }
 
-    /* Pricing cards */
-    .pricing-options {
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Radio options */
+    .radio-group {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .pricing-card {
+    .radio-item {
       display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 20px;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
+      align-items: flex-start;
+      gap: 12px;
       cursor: pointer;
-      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
-      background: var(--cream);
-      position: relative;
     }
 
-    .pricing-card:hover {
-      border-color: var(--green);
-      background: var(--white);
-    }
-
-    .pricing-card input[type="radio"] {
+    .radio-item input[type="radio"] {
       appearance: none;
       -webkit-appearance: none;
       width: 20px;
@@ -133,17 +136,19 @@
       min-width: 20px;
       border: 1.5px solid var(--border);
       border-radius: 50%;
-      background: var(--white);
+      background: var(--cream);
       cursor: pointer;
       position: relative;
       transition: border-color 0.2s;
+      margin-top: 2px;
     }
 
-    .pricing-card input[type="radio"]:checked {
+    .radio-item input[type="radio"]:checked {
       border-color: var(--green);
+      background: var(--white);
     }
 
-    .pricing-card input[type="radio"]:checked::after {
+    .radio-item input[type="radio"]:checked::after {
       content: '';
       position: absolute;
       width: 10px;
@@ -155,46 +160,82 @@
       transform: translate(-50%, -50%);
     }
 
-    .pricing-card.selected {
-      border-color: var(--green);
-      background: #f0faf4;
-      box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
-    }
-
-    .pricing-card-content {
-      flex: 1;
-    }
-
-    .pricing-label {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 2px;
-    }
-
-    .pricing-amount {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.4rem;
+    .radio-item span {
+      font-size: 0.9rem;
       color: var(--text);
+      line-height: 1.5;
     }
 
-    .pricing-amount span {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
-      color: var(--muted);
-      font-weight: 300;
-      margin-left: 4px;
+    /* Checkbox options */
+    .check-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .pricing-badge {
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .check-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 5px;
+      background: var(--cream);
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+      margin-top: 2px;
+    }
+
+    .check-item input[type="checkbox"]:checked {
       background: var(--green);
-      color: white;
+      border-color: var(--green);
+    }
+
+    .check-item input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 2px;
+      width: 6px;
+      height: 10px;
+      border: 2px solid white;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+
+    .check-item span {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* "Other" inline input */
+    .other-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .other-row input[type="text"] {
+      flex: 1;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+    }
+
+    .section-rule {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 32px;
     }
 
     .submit-btn {
@@ -209,85 +250,159 @@
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s, transform 0.15s;
-      margin-top: 12px;
+      margin-top: 8px;
       letter-spacing: 0.01em;
     }
 
-    .submit-btn:hover {
-      background: var(--green-dark);
-      transform: translateY(-1px);
-    }
-
+    .submit-btn:hover { background: var(--green-dark); transform: translateY(-1px); }
     .submit-btn:active { transform: translateY(0); }
 
     @media (max-width: 520px) {
       .card { padding: 36px 24px; }
-      .name-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <center>
-      <img src="./image/amona_logo.svg" alt="amona logo">
-    </center>
     <div class="card-header">
-      <h1>One quick<br/><em>question</em></h1>
+      <h1>CEO Hangout<br/><em>Expression of Interest</em></h1>
       <div class="divider"></div>
-      <p>Help us understand what works for you — takes 30 seconds.</p>
+      <p>Tell us a bit about yourself and your business. This helps us make the CEO Hangout as useful as possible for you.</p>
     </div>
 
-    <form id="pricingForm" onsubmit="handleSubmit(event)" novalidate>
+    <form id="hangoutForm" onsubmit="handleSubmit(event)" novalidate>
 
-      <!-- Name -->
+      <!-- 1. Full Name -->
       <div class="field-group">
-        <div class="name-row">
-          <div>
-            <label for="firstName">First name</label>
-            <input type="text" id="firstName" name="firstName" placeholder="Ada" required />
-          </div>
-          <div>
-            <label for="lastName">Last name</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Lovelace" required />
+        <span class="field-number">1</span>
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Ada Lovelace" required />
+      </div>
+
+      <!-- 2. Business Name -->
+      <div class="field-group">
+        <span class="field-number">2</span>
+        <label for="businessName">Business Name</label>
+        <input type="text" id="businessName" name="businessName" placeholder="Acme Ltd" required />
+      </div>
+
+      <!-- 3. Phone -->
+      <div class="field-group">
+        <span class="field-number">3</span>
+        <label for="phone">Phone / WhatsApp Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="+234 800 000 0000" required />
+      </div>
+
+      <!-- 4. Email -->
+      <div class="field-group">
+        <span class="field-number">4</span>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="ada@example.com" required />
+      </div>
+
+      <hr class="section-rule"/>
+
+      <!-- 5. Business Stage -->
+      <div class="field-group">
+        <span class="field-number">5</span>
+        <div class="field-label">What best describes your business stage?</div>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="businessStage" value="preparing_to_start" required />
+            <span>I am preparing to start</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="businessStage" value="less_than_2_years" />
+            <span>Less than 2 years in business</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="businessStage" value="2_to_5_years" />
+            <span>2–5 years in business</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="businessStage" value="6_to_10_years" />
+            <span>6–10 years in business</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="businessStage" value="more_than_10_years" />
+            <span>More than 10 years in business</span>
+          </label>
+        </div>
+      </div>
+
+      <hr class="section-rule"/>
+
+      <!-- 6. Biggest Challenge -->
+      <div class="field-group">
+        <span class="field-number">6</span>
+        <div class="field-label">What is the biggest challenge currently affecting your business?</div>
+        <div class="check-group">
+          <label class="check-item">
+            <input type="checkbox" name="challenge" value="understanding_numbers" />
+            <span>Understanding my numbers and financial performance</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="challenge" value="building_systems" />
+            <span>Building systems and processes</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="challenge" value="managing_team" />
+            <span>Managing or delegating to my team</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="challenge" value="growing_sales" />
+            <span>Growing sales and revenue</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="challenge" value="reducing_dependence" />
+            <span>Reducing my dependence on the business</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="challenge" value="scaling_wealth" />
+            <span>Scaling and protecting business wealth</span>
+          </label>
+          <label class="check-item" id="other-check-item">
+            <input type="checkbox" name="challenge" value="other" id="otherCheckbox" onchange="toggleOther(this)" />
+            <span>Other:</span>
+          </label>
+          <div id="otherInput" style="display:none; padding-left: 32px;">
+            <input type="text" id="otherText" name="otherChallenge" placeholder="Please describe…" />
           </div>
         </div>
       </div>
 
-      <!-- Email -->
+      <hr class="section-rule"/>
+
+      <!-- 7. How can CEO Hangout help -->
       <div class="field-group">
-        <label for="email">Email address</label>
-        <input type="email" id="email" name="email" placeholder="ada@example.com" required />
+        <span class="field-number">7</span>
+        <label for="helpArea">Which area would you most like the CEO Hangout to help you with?</label>
+        <textarea id="helpArea" name="helpArea" placeholder="Share what you're hoping to get out of the CEO Hangout…"></textarea>
       </div>
 
-      <!-- Pricing -->
+      <hr class="section-rule"/>
+
+      <!-- 8. Willingness to pay -->
       <div class="field-group">
-        <div class="field-label">How much would you be willing to pay?</div>
-        <div class="pricing-options">
-
-          <label class="pricing-card" id="card-a">
-            <input type="radio" name="price" value="30000" onchange="selectCard('card-a')" required />
-            <div class="pricing-card-content">
-              <div class="pricing-label">Option A</div>
-              <div class="pricing-amount">₦30,000</div>
-            </div>
+        <span class="field-number">8</span>
+        <div class="field-label">Will you be willing to pay to attend the CEO Hangout at the rate of ₦50,000 once the date and venue are confirmed?</div>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="willingToPay" value="yes_ready" required />
+            <span>Yes, I am ready to pay</span>
           </label>
-
-          <label class="pricing-card" id="card-b">
-            <input type="radio" name="price" value="50000" onchange="selectCard('card-b')" />
-            <div class="pricing-card-content">
-              <div class="pricing-label">Option B</div>
-              <div class="pricing-amount">₦50,000</div>
-            </div>
+          <label class="radio-item">
+            <input type="radio" name="willingToPay" value="yes_depending" />
+            <span>Yes, depending on the attendance fee</span>
           </label>
-
-          <label class="pricing-card" id="card-c">
-            <input type="radio" name="price" value="70000" onchange="selectCard('card-c')" />
-            <div class="pricing-card-content">
-              <div class="pricing-label">Option C</div>
-              <div class="pricing-amount">₦70,000</div>
-            </div>
+          <label class="radio-item">
+            <input type="radio" name="willingToPay" value="more_info" />
+            <span>I would like more information first</span>
           </label>
-
+          <label class="radio-item">
+            <input type="radio" name="willingToPay" value="not_now" />
+            <span>Not at the moment</span>
+          </label>
         </div>
       </div>
 
@@ -296,32 +411,34 @@
   </div>
 
   <script>
-    function selectCard(selectedId) {
-      ['card-a', 'card-b', 'card-c'].forEach(id => {
-        document.getElementById(id).classList.toggle('selected', id === selectedId);
-      });
+    function toggleOther(checkbox) {
+      document.getElementById('otherInput').style.display = checkbox.checked ? 'block' : 'none';
     }
 
     async function handleSubmit(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('.submit-btn');
       const form = e.target;
+      const btn = form.querySelector('.submit-btn');
 
-      const selectedPrice = form.querySelector('input[name="price"]:checked');
-      if (!selectedPrice) {
-        alert('Please select a pricing option.');
-        return;
+      const challenges = [...form.querySelectorAll('input[name="challenge"]:checked')].map(cb => cb.value);
+      if (document.getElementById('otherCheckbox').checked) {
+        const otherVal = document.getElementById('otherText').value.trim();
+        if (otherVal) challenges.push('other: ' + otherVal);
       }
+
+      const payload = {
+        fullName:      form.fullName.value.trim(),
+        businessName:  form.businessName.value.trim(),
+        phone:         form.phone.value.trim(),
+        email:         form.email.value.trim(),
+        businessStage: form.businessStage.value,
+        challenges:    challenges,
+        helpArea:      form.helpArea.value.trim(),
+        willingToPay:  form.willingToPay.value,
+      };
 
       btn.textContent = 'Submitting…';
       btn.disabled = true;
-
-      const payload = {
-        firstName:  form.firstName.value.trim(),
-        lastName:   form.lastName.value.trim(),
-        email:      form.email.value.trim(),
-        price:      selectedPrice.value,
-      };
 
       try {
         const res = await fetch('https://hook.eu1.make.com/oavcmszdjsnwpaer6rdy9354pgplalj5', {
@@ -334,9 +451,7 @@
           btn.textContent = '✓ Submitted!';
           btn.style.background = '#1f6b40';
           form.reset();
-          ['card-a', 'card-b', 'card-c'].forEach(id => {
-            document.getElementById(id).classList.remove('selected');
-          });
+          document.getElementById('otherInput').style.display = 'none';
         } else {
           throw new Error('Server error');
         }
